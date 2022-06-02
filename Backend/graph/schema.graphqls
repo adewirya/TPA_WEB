@@ -1,0 +1,185 @@
+type User{
+  user_id : String!,
+  full_name : String!,
+  username : String!,
+  email : String!,
+  profile_picture : String!,
+  password : String!,
+  is_google : Boolean!,
+  is_verified : Boolean!,
+
+  mutual_users : [User!]
+  saved_post : [SavedPost!]
+  posts : [Post!]
+  tagged_post : [TaggedPost!]
+  followed_id : [UserRelation!]
+  history : [SearchHistory!]
+}
+
+type SearchHistory{
+  id : ID!,
+  user_id : ID!,
+  history : String!
+}
+
+type TaggedPost{
+  id : ID!,
+  post_id : ID!,
+  user_id : ID!
+}
+
+type Post{
+  id : ID!,
+  user_id: String!,
+  caption: String!,
+  created_at: String!,
+  post_like : Int!,
+  post_contents : [PostContent!]!
+}
+
+type SavedPost{
+  id : ID!,
+  user_id : String!,
+  post_id : String!,
+  is_saved : Boolean!
+}
+
+
+type PostContent{
+  id : ID!,
+  post_id : String!,
+  type : String!,
+  path : String!,
+}
+
+type PostComments{
+  id : ID!,
+  comment_like : Int!,
+  post_id : String!,
+  comments : String!,
+  sender_username : String!
+}
+
+type UserRelation{
+  id : ID!,
+  user_id : ID!,
+  target_id : ID!,
+  is_follow : Boolean!
+}
+
+input NewPostContent{
+  path: String!,
+  type: String!
+}
+
+input NewPost{
+  contents: [NewPostContent]!
+  caption: String!
+  username: String!
+}
+
+
+input LoginUser{
+  user_or_email : String!,
+  password : String!
+}
+
+input NewUser{
+  username : String!,
+  full_name : String!,
+  email : String!,
+  password : String!,
+  is_google : Boolean!,
+  is_verified : Boolean!
+}
+
+input VerificationInput{
+  token : String!,
+  email : String!
+}
+
+input resendVerification{
+  email : String!
+}
+
+input resetPassword{
+  token : String!,
+  password : String!
+}
+
+type CommentReply{
+  id : ID!,
+  comment_id : String!,
+  reply : String!,
+  sender : String!
+}
+
+type Query{
+  users : [User!]
+  posts : [Post!]
+}
+
+type PostPagged{
+  posts: [Post!]!,
+  nextposts : String!,
+  hasnext : Boolean!
+}
+
+type Hashtags{
+  id : ID!,
+  name : String!
+}
+
+
+type Mutation {
+  addHistory(user_id : ID!, history :String!) : String!
+
+  changePostCaption(post_id : ID!, caption : String!) : String!
+  getUserBasedID(user_id : ID!) : User!
+  selectHomepage(userid : ID!, nextpost : String) : PostPagged!
+
+  searchHashtag(hashtag : String!) : [Hashtags!]
+  selectPostExplorer(nextpost : String) : PostPagged!
+
+  addReply(comment_id : ID!, msg : String!, sender : String!) : String!
+  deleteReply(reply_id : ID!) : String!
+  getAllReply(comment_id : ID!) : [CommentReply!]
+
+  deleteComment(id : ID!) : String!
+  isSavedPost(user_id : ID!, post_id : ID!) : Boolean!
+  likePost(id : ID!) : String!
+  unLikePost(id : ID!) : String!
+  savePost(user_id : ID!, post_id : ID!) : String!
+  unsavePost(user_id : ID!, post_id : ID! ) : String!
+  addComment(username : String!, comment : String!, post_id : ID!) : String!
+  getAllComment(post_id : ID!) : [PostComments!]
+  deletePost(post_id : ID!) : String!
+  addCommentLike(id : ID!) : String!
+  unlikeComment(id : ID!) : String!
+
+  selectPostBasedID(id : ID!) : Post!
+
+
+  searchUserAuto(username: String!, currUser: String!) : String!
+
+  selectAllFollowedPost(id: ID!) : [Post!]
+
+  selectAllPost(id : ID!) : [Post!]
+  addNewPost(input: NewPost!) : Post!
+  getFollowStatus(id: ID!, targetId : ID!) : Boolean!
+  follow(id: ID!, targetId : ID!) : String!
+  unfollow(id: ID!, targetId : ID!) : String!
+  searchUser(username: String!, currUser: String!) : [User!]
+
+  sendUserBasedOnUsername(username : String!) : User!
+  sendUserBasedOnJWT(token : String!) : User!
+  sendGmailOnReset(email : String!) : String!
+  resetPassword(input: resetPassword!) : String!
+  login(input: LoginUser!) : String!
+  register(input: NewUser!) : String!
+  loginGoogle(access_token: String!) : String!
+  resendVerification(input: resendVerification!) : String!
+  verifyUser(input : VerificationInput!) : String!
+  updateUser(id: ID!, input : NewUser!) : String!
+  deleteUser(id: ID!) :Boolean!
+}

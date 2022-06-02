@@ -1,0 +1,28 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+export default function TagPost(){
+
+    let senderPath = "./other-profile.png";
+    let sender = "Pai"
+    let postPath = "./tesss.png"
+
+    return (
+        <Link to="/postdetails/18"  style={{textDecoration : 'none'}}className="template-notif">
+
+            <div className="image-left">
+                <img src={senderPath} className="w-8 h-8" alt="" />
+            </div>
+            
+            <div className="mid-content">
+                <b>{sender}</b> tagged you in a post.
+            </div>
+
+            <div className="image-right ">
+                <img src={postPath} className="w-8 h-8" alt="" />
+
+            </div>
+
+        </Link>
+    )
+}

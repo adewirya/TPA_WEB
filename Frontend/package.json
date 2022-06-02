@@ -1,0 +1,45 @@
+{
+  "name": "TPA_NK",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.4.5",
+    "firebase": "^8.9.0",
+    "graphql": "^15.5.1",
+    "millify": "^4.0.0",
+    "react": "^17.0.2",
+    "react-animated-modal": "^1.1.1",
+    "react-animated-popup": "^0.1.1",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-countdown": "^2.3.2",
+    "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-load": "^0.1.8",
+    "react-loading": "^2.0.3",
+    "react-modal": "^3.14.3",
+    "react-r": "^2.0.0-rc02",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-share": "^4.4.0",
+    "reactjs-popup": "^2.0.5",
+    "rxjs": "^7.3.0",
+    "styled-components": "^5.3.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.15",
+    "@types/react-router-dom": "^5.1.8",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "sass": "^1.36.0",
+    "typescript": "^4.3.5"
+  }
+}
